@@ -1,6 +1,6 @@
 <script setup>
 import Nucleus from 'nucleus-vue';
-import VoiceCaptureVue from './main-voicecapture';
+import VoiceCaptureVue from './components/VoiceCapture.vue';
 import { configApp } from './App.config';
 </script>
 

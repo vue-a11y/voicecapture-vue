@@ -16,8 +16,8 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/main-darkmode.js'),
-      name: 'VoiceCaptureVue',
+      entry: resolve(__dirname, 'src/main-voicecapture.js'),
+      name: 'VoiceCapture',
       // the proper extensions will be added
       fileName: 'voicecapture-vue'
     },
