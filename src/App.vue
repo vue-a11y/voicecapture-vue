@@ -14,6 +14,10 @@ function openVoiceCapture(mode) {
   isVoiceCaptureExample.value = true;
 }
 
+function statusVoiceCapture(value) {
+  isVoiceCaptureExample.value = value;
+}
+
 function returnVoiceTranscript(transcript) {
   voiceTextTranscript.value = transcript;
 }
@@ -25,19 +29,11 @@ function returnVoiceTranscript(transcript) {
       <h2>Voice Capture Example</h2>
       <div class="content-actions">
         <div class="example-actions">
-          <button
-            class="button-voicecapture-example"
-            type="button"
-            @click="openVoiceCapture('fullscreen')"
-          >
+          <button class="button-voicecapture-example" type="button" @click="openVoiceCapture('fullscreen')">
             <span class="material-symbols-outlined"> &#xe029; </span>
             <span class="material-symbols-outlined"> &#xe5d0; </span> FullScreen
           </button>
-          <button
-            class="button-voicecapture-example"
-            type="button"
-            @click="openVoiceCapture('float')"
-          >
+          <button class="button-voicecapture-example" type="button" @click="openVoiceCapture('float')">
             <span class="material-symbols-outlined"> &#xe029; </span>
             <span class="material-symbols-outlined"> &#xe62e; </span> Float
           </button>
@@ -62,24 +58,16 @@ function returnVoiceTranscript(transcript) {
         </div>
       </div>
 
-      <VoiceCaptureVue
-        :start="isVoiceCaptureExample"
-        @voiceTranscript="returnVoiceTranscript"
-        :lang="langSelect"
-        :mode="modeSelect"
-      />
+      <VoiceCaptureVue :status="isVoiceCaptureExample" @voiceTranscript="returnVoiceTranscript"
+        @onStatus="statusVoiceCapture" :lang="langSelect" :mode="modeSelect" />
 
       <div v-if="voiceTextTranscript" class="content">
         <div class="input-group">
           <label for="voiceTextArea" class="input-label">
             <h2>Transcript Results</h2>
           </label>
-          <textarea
-            id="voiceTextArea"
-            class="input-field textarea"
-            v-model="voiceTextTranscript"
-            placeholder="Texto do Voice Transcript"
-          ></textarea>
+          <textarea id="voiceTextArea" class="input-field textarea" v-model="voiceTextTranscript"
+            placeholder="Texto do Voice Transcript"></textarea>
         </div>
       </div>
     </div>
@@ -91,6 +79,7 @@ function returnVoiceTranscript(transcript) {
   width: 50%;
   display: flex;
   gap: 20px;
+
   @media (max-width: 800px) {
     width: 100%;
   }
@@ -116,6 +105,7 @@ function returnVoiceTranscript(transcript) {
   .material-symbols-outlined {
     margin-right: 0.5rem;
   }
+
   .material-symbols-outlined.plus {
     margin: 0 0.5rem;
   }
@@ -166,12 +156,15 @@ function returnVoiceTranscript(transcript) {
 .content-actions {
   display: flex;
   gap: 20px;
+
   button,
   .language {
     width: 50%;
   }
+
   @media (max-width: 800px) {
     flex-direction: column;
+
     .language {
       width: 100%;
     }

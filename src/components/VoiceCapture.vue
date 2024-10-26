@@ -1,7 +1,7 @@
 <template>
   <section
     class="voicecapture"
-    :class="{ active: start, [mode]: mode }"
+    :class="{ active: status, [mode]: mode }"
     @click="deactivateVoice"
   >
     <button class="exit" type="button" @click="deactivateVoice">
@@ -29,7 +29,7 @@ import { translates } from './VoiceCapture.translate';
 export default {
   name: 'VoiceCapture',
   props: {
-    start: {
+    status: {
       type: Boolean,
       default: false,
     },
@@ -42,7 +42,7 @@ export default {
       default: 'fullscreen',
     },
   },
-  emits: ['voiceTranscript'],
+  emits: ['voiceTranscript', 'onStatus'],
   setup(props, { emit }) {
     const recognizing = ref(false);
     const errorOccurred = ref(false);
@@ -66,6 +66,7 @@ export default {
         recognizing.value = false;
         animationButton.value = false;
         recognition.value.stop();
+        emit('onStatus', false);
       }
     };
 
@@ -140,7 +141,7 @@ export default {
       return translationsForLang[key] || key;
     };
 
-    watch(() => props.start, (newVal) => {
+    watch(() => props.status, (newVal) => {
       if (newVal) activateVoice();
       else deactivateVoice();
     });
