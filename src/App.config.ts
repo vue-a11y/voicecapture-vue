@@ -18,9 +18,39 @@ export const configApp = {
     {
       name: 'Usage',
       language: 'tsx',
-      content: `import VoiceCaptureVue from 'voicecapture-vue'
+      content: `<script setup>
+import { ref } from 'vue';
+import VoiceCaptureVue from 'voicecapture-vue';
 
-<VoiceCaptureVue />`,
+const isVoiceCaptureExample = ref(false);
+const voiceTextTranscript = ref('');
+
+function openVoiceCapture() {
+  isVoiceCaptureExample.value = true;
+}
+
+function statusVoiceCapture(value) {
+  isVoiceCaptureExample.value = value;
+}
+
+function returnVoiceTranscript(transcript) {
+  voiceTextTranscript.value = transcript;
+}
+</script>
+
+<template>
+  <VoiceCaptureVue
+    :status="isVoiceCaptureExample"
+    @voiceTranscript="returnVoiceTranscript"
+    @onStatus="s  tatusVoiceCapture"
+  />
+  <textarea
+    v-if="voiceTextTranscript"
+    v-model="voiceTextTranscript"
+    placeholder="Text Voice Transcript"
+  >
+  </textarea>
+</template>`,
     },
   ],
 }
