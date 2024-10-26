@@ -5,7 +5,7 @@ const vueVersion = pkg.dependencies.vue.replace('^', '');
 export const configApp = {
   name: 'voicecapture-vue',
   npm: 'https://www.npmjs.com/package/voicecapture-vue',
-  github: 'https://github.com/livresaber/voicecapture-vue',
+  github: 'https://github.com/vue-a11y/voicecapture-vue',
   linkedin: 'https://www.linkedin.com/in/lucasferreiralimax',
   appVersion,
   vueVersion,

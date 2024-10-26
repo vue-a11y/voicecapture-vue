@@ -58,10 +58,15 @@ function returnVoiceTranscript(transcript) {
         </div>
       </div>
 
-      <VoiceCaptureVue :status="isVoiceCaptureExample" @voiceTranscript="returnVoiceTranscript"
-        @onStatus="statusVoiceCapture" :lang="langSelect" :mode="modeSelect" />
-
-      <div v-if="voiceTextTranscript" class="content">
+      <VoiceCaptureVue
+        :status="isVoiceCaptureExample"
+        :lang="langSelect"
+        :mode="modeSelect"
+        @voiceTranscript="returnVoiceTranscript"
+        @onStatus="statusVoiceCapture"
+      />
+    </div>
+    <div v-if="voiceTextTranscript" class="content">
         <div class="input-group">
           <label for="voiceTextArea" class="input-label">
             <h2>Transcript Results</h2>
@@ -70,7 +75,6 @@ function returnVoiceTranscript(transcript) {
             placeholder="Texto do Voice Transcript"></textarea>
         </div>
       </div>
-    </div>
   </Nucleus>
 </template>
 
