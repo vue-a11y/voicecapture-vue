@@ -1,7 +1,3 @@
-Here's a more concise version of the README for `voicecapture-vue`, incorporating your previous example while maintaining clarity:
-
----
-
 # VoiceCapture Vue
 
 `VoiceCapture Vue` is a Vue component for real-time voice capture and speech transcription. This component leverages the Web Speech API for speech recognition and provides an interactive UI.
@@ -63,7 +59,7 @@ Use the component in your template with language and mode options:
 |------------|---------|------------|----------------------------------------------------------------------------------------------|
 | `status`   | Boolean | `false`    | Toggles the voice capture on/off. Set to `true` to activate voice recognition.              |
 | `lang`     | String  | `"en"`     | Specifies the language for speech recognition (e.g., `"pt"` for Portuguese).               |
-| `mode`     | String  | `"normal"` | Defines the display mode: `"normal"` for inline, `"fullscreen"` for full-screen.           |
+| `mode`     | String  | `"fullscrenn"` | Defines the display mode: `"float"` for inline, `"fullscreen"` for full-screen.           |
 
 ### Events
 
