@@ -22,7 +22,7 @@ function returnVoiceTranscript(transcript) {
 <template>
   <Nucleus :config="configApp">
     <div class="content">
-      <h2>VoiceCapture Example</h2>
+      <h2>Voice Capture Example</h2>
       <div class="content-actions">
         <div class="example-actions">
           <button
@@ -161,5 +161,20 @@ function returnVoiceTranscript(transcript) {
 .textarea {
   resize: vertical;
   height: 100px;
+}
+
+.content-actions {
+  display: flex;
+  gap: 20px;
+  button,
+  .language {
+    width: 50%;
+  }
+  @media (max-width: 800px) {
+    flex-direction: column;
+    .language {
+      width: 100%;
+    }
+  }
 }
 </style>
