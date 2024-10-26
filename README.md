@@ -1,81 +1,73 @@
-# voicecapture-vue
+Here's a more concise version of the README for `voicecapture-vue`, incorporating your previous example while maintaining clarity:
 
-A component darkmode injection in your document page with vue.js
+---
 
-<a href="https://voicecapture-vue.web.app" target="_blank">Live Preview</a>
+# VoiceCapture Vue
 
-Install
-```js
-npm install --save voicecapture-vue
+`VoiceCapture Vue` is a Vue component for real-time voice capture and speech transcription. This component leverages the Web Speech API for speech recognition and provides an interactive UI.
+
+## Installation
+
+Install `voicecapture-vue` via npm:
+
+```bash
+npm install voicecapture-vue
 ```
 
-Usage basic
-```vue
-import VoiceCaptureVue from 'voicecapture-vue';
+## Basic Usage
 
-<VoiceCaptureVue />
-```
+### Script Setup
 
-Prop hiddenLabel
-```vue
-<VoiceCaptureVue :hiddenLabel="true" />
-```
+```javascript
+<script setup>
+import { ref } from 'vue';
+import VoiceCapture from 'voicecapture-vue';
 
-Prop hiddenIcon
-```vue
-<VoiceCaptureVue :hiddenIcon="true" />
-```
+const isVoiceCaptureActive = ref(false);
+const selectedLang = ref('en');
+const selectedMode = ref('fullscreen');
+const transcript = ref('');
 
-Prop labelDark and labelLight
-```vue
-<VoiceCaptureVue labelDark="Tema escuro" labelLight="Tema claro" />
-```
-
-Slot change icon and label custom
-```vue
-<VoiceCaptureVue>
-  <template #iconDark>
-    <svg></svg>
-  </template>
-  <template #iconLight>
-    <svg></svg>
-  </template>
-  <template #labelDark>
-    Off
-  </template>
-  <template #labelLight>
-    On
-  </template>
-</VoiceCaptureVue>
-```
-
-Usage useVoiceCaptureVue with toggleMode and mode value
-```vue
-import { useVoiceCaptureVue } from 'voicecapture-vue';
-
-const { mode, toggleMode } = useVoiceCaptureVue();
-
-<button @click="toggleMode">VoiceCaptureVue {{ mode }}</button>
-```
-
-Style modification and usage in your styles
-```css
-body {
-  --dm-color-primary: #41b883;
-  --dm-color-secondary: #34495e;
-  --dm-color-text: #222;
-  --dm-color-background: #fff;
+function handleTranscript(text) {
+  transcript.value = text;
 }
 
-body.darkmode {
-  --dm-color-text: #fff;
-  --dm-color-background: #222;
+function handleStatusChange(status) {
+  isVoiceCaptureActive.value = status;
 }
+</script>
 ```
-Create your variable colors and update this with class .darkmode.
 
-### Description class of components
-If VoiceCaptureVue usage in a page, a class in body document is update with class darkmode.
-In LocalStorage is created a key store with value current mode.
-Do you usage children body.darkmode styles for your application.
-I recomend create a variables colors in css and update this with toggle class of body document.
+### Template Example
+
+Use the component in your template with language and mode options:
+
+```html
+<template>
+  <div>
+    <VoiceCapture
+      :status="isVoiceCaptureActive"
+      :lang="selectedLang"
+      :mode="selectedMode"
+      @voiceTranscript="handleTranscript"
+      @onStatus="handleStatusChange"
+    />
+    <textarea v-model="transcript" placeholder="Transcript results"></textarea>
+  </div>
+</template>
+```
+
+### Props
+
+| Prop       | Type    | Default    | Description                                                                                  |
+|------------|---------|------------|----------------------------------------------------------------------------------------------|
+| `status`   | Boolean | `false`    | Toggles the voice capture on/off. Set to `true` to activate voice recognition.              |
+| `lang`     | String  | `"en"`     | Specifies the language for speech recognition (e.g., `"pt"` for Portuguese).               |
+| `mode`     | String  | `"normal"` | Defines the display mode: `"normal"` for inline, `"fullscreen"` for full-screen.           |
+
+### Events
+
+| Event              | Payload     | Description                                                                                     |
+|--------------------|-------------|-------------------------------------------------------------------------------------------------|
+| `@voiceTranscript` | `String`    | Emitted with the transcription generated from the user's speech.                              |
+| `@onStatus`        | `Boolean`   | Emitted when the voice capture status changes (active/inactive).                             |
