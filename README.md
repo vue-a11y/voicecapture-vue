@@ -45,6 +45,7 @@ Use the component in your template with language and mode options:
       :status="isVoiceCaptureActive"
       :lang="selectedLang"
       :mode="selectedMode"
+      :clipboard="true"
       @voiceTranscript="handleTranscript"
       @onStatus="handleStatusChange"
     />
@@ -60,6 +61,7 @@ Use the component in your template with language and mode options:
 | `status`   | Boolean | `false`    | Toggles the voice capture on/off. Set to `true` to activate voice recognition.              |
 | `lang`     | String  | `"en"`     | Specifies the language for speech recognition (e.g., `"pt"` for Portuguese).               |
 | `mode`     | String  | `"fullscrenn"` | Defines the display mode: `"float"` for inline, `"fullscreen"` for full-screen.           |
+| `clipboard`| Boolean | `false`      | If `true`, copies the final transcript text to the clipboard automatically.                 |
 
 ### Events
 

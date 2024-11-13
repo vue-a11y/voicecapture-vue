@@ -41,6 +41,7 @@ function returnVoiceTranscript(transcript) {
 <template>
   <VoiceCaptureVue
     :status="isVoiceCaptureExample"
+    :clipboard="true"
     @voiceTranscript="returnVoiceTranscript"
     @onStatus="s  tatusVoiceCapture"
   />
