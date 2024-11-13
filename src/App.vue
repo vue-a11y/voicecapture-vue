@@ -62,6 +62,7 @@ function returnVoiceTranscript(transcript) {
         :status="isVoiceCaptureExample"
         :lang="langSelect"
         :mode="modeSelect"
+        :clipboard="true"
         @voiceTranscript="returnVoiceTranscript"
         @onStatus="statusVoiceCapture"
       />
