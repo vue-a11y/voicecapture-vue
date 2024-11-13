@@ -3,17 +3,26 @@
     class="voicecapture"
     :class="{ active: status, [mode]: mode }"
     @click="deactivateVoice"
+    aria-modal="true"
+    role="dialog"
+    :aria-expanded="status ? 'true' : 'false'"
   >
-    <button class="exit" type="button" @click="deactivateVoice">
-      <i class="icon icon-exit">X</i>
+    <button
+      class="exit"
+      @click="deactivateVoice"
+      :aria-label="getTranslation('close')"
+      type="button"
+    >
+      <i class="icon icon-exit" aria-hidden="true">X</i>
     </button>
-    <p class="text-tip">{{ translatedText }}</p>
+    <p class="text-tip" aria-live="polite">{{ translatedText }}</p>
     <button
       type="button"
       class="btn-voice"
       :class="{ active: animationButton }"
+      :aria-label="getTranslation('open')"
     >
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
         <path d="M17 11.998c0 2.76-2.23 5-4.99 5l-.002.002a4.994 4.994 0 01-4.979-5h-2c0 3.52 2.59 6.433 5.98 6.92v3.078h.01V22h2v-3.08h-.01A6.982 6.982 0 0019 11.998z" />
         <path fill="none" d="M0 0h24v24H0z" />
         <path d="M12 15c1.66 0 2.99-1.34 2.99-3L15 5c0-1.66-1.34-3-3-3S9 3.34 9 5v7c0 1.66 1.34 3 3 3z" />
@@ -66,12 +75,10 @@ export default {
     };
 
     const deactivateVoice = () => {
-      if (recognizing.value && recognition.value) {
-        recognizing.value = false;
-        animationButton.value = false;
-        recognition.value.stop();
-        emit('onStatus', false);
-      }
+      recognizing.value = false;
+      animationButton.value = false;
+      recognition.value.stop();
+      emit('onStatus', false);
     };
 
     const setupVoiceRecognition = () => {
@@ -169,6 +176,7 @@ export default {
       translatedText,
       activateVoice,
       deactivateVoice,
+      getTranslation
     };
   },
 };
