@@ -41,6 +41,10 @@ export default {
       type: String,
       default: 'fullscreen',
     },
+    clipboard: {
+      type: Boolean,
+      default: false,
+    },
   },
   emits: ['voiceTranscript', 'onStatus'],
   setup(props, { emit }) {
@@ -123,6 +127,16 @@ export default {
       translatedText.value = interimTranscript || finalTranscript.value;
 
       if (finalTranscript.value) {
+        if(props.clipboard) {
+          navigator.clipboard.writeText(finalTranscript.value).then(
+            () => {
+              console.log('Text copied to clipboard');
+            },
+            (err) => {
+              console.error('Could not copy text to clipboard', err);
+            }
+          );
+        }
         emit('voiceTranscript', finalTranscript.value);
         deactivateVoice();
       }
